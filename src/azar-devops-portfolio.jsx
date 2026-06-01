@@ -305,7 +305,7 @@ function StatCounter({ value, label, suffix = "", colorClass }) {
   );
 }
 
-function ProjectCard({ title, desc, tech, achievements, arch, gradientStyle }) {
+function ProjectCard({ title, desc, tech, achievements, arch, gradientStyle, github }) {
   const [expanded, setExpanded] = useState(false);
   return (
     <GlassCard className="p-6 group cursor-pointer" hover>
@@ -330,7 +330,7 @@ function ProjectCard({ title, desc, tech, achievements, arch, gradientStyle }) {
           ))}
         </ul>
       )}
-      <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+      <a href={github || "https://github.com"} target="_blank" rel="noopener noreferrer"
         className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-300 text-xs border border-white/10 transition-all hover:border-white/20" style={{background:"rgba(255,255,255,0.05)"}}>
         <IcoGithub /> GitHub
       </a>
@@ -428,6 +428,7 @@ export default function Portfolio() {
       gradientStyle:{ background:"linear-gradient(to right, #f97316, #dc2626)" },
       achievements:["Automated 20+ manual tasks saving 8+ hours/week","Cost Lambda reduced AWS bill by ~18%","DLQ ensures 100% event processing reliability","Real-time Slack/email alerts for infra events"]},
     { title:"MongoDB Production Backup to AWS S3",
+      github:"https://github.com/AzarCodes/MongoDB-Production-Backup-to-AWS-S3",
       desc:"Production-grade MongoDB backup system — streams daily dumps directly to S3 with zero local disk usage, AES-256 encryption, versioning, and automated lifecycle tiering.",
       arch:"MongoDB → mongodump --archive --gzip\n→ aws s3 cp (stream, no disk) → S3 (Versioned + AES-256)\nLifecycle: 30d → STANDARD_IA | 90d → GLACIER | 180d → DEEP_ARCHIVE\nCron: 03:00 AM daily | Restore: mongorestore --archive --gzip",
       tech:["AWS S3","MongoDB","Bash","AWS CLI","S3 Lifecycle","AES-256","Versioning","Cron","Ubuntu VPS"],
