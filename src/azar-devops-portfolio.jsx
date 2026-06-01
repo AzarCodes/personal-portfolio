@@ -427,12 +427,19 @@ export default function Portfolio() {
       tech:["Lambda","EventBridge","SNS","SES","Python","CloudWatch","IAM","SQS"],
       gradientStyle:{ background:"linear-gradient(to right, #f97316, #dc2626)" },
       achievements:["Automated 20+ manual tasks saving 8+ hours/week","Cost Lambda reduced AWS bill by ~18%","DLQ ensures 100% event processing reliability","Real-time Slack/email alerts for infra events"]},
-    { title:"Automated Backup Pipelines to S3",
-      desc:"Fully automated backup system with incremental snapshots, S3 lifecycle management, and cross-region replication.",
-      arch:"EC2/RDS Snapshots → Lambda → S3 (Versioned)\nLifecycle → Glacier | KMS Encryption | SNS | CloudTrail",
-      tech:["S3","Lambda","RDS Snapshots","KMS","Glacier","Python","CloudTrail","SNS"],
+    { title:"MongoDB Production Backup to AWS S3",
+      desc:"Production-grade MongoDB backup system — streams daily dumps directly to S3 with zero local disk usage, AES-256 encryption, versioning, and automated lifecycle tiering.",
+      arch:"MongoDB → mongodump --archive --gzip\n→ aws s3 cp (stream, no disk) → S3 (Versioned + AES-256)\nLifecycle: 30d → STANDARD_IA | 90d → GLACIER | 180d → DEEP_ARCHIVE\nCron: 03:00 AM daily | Restore: mongorestore --archive --gzip",
+      tech:["AWS S3","MongoDB","Bash","AWS CLI","S3 Lifecycle","AES-256","Versioning","Cron","Ubuntu VPS"],
       gradientStyle:{ background:"linear-gradient(to right, #4ade80, #14b8a6)" },
-      achievements:["Daily backups for 50+ servers, zero manual work","Storage costs reduced by 60% via lifecycle rules","RTO validated under 30 minutes","Cross-region replication for geo-redundancy"]},
+      achievements:[
+        "Zero local disk usage — mongodump streams directly to S3 via pipe, no temp files",
+        "AES-256 server-side encryption + S3 versioning enabled on production backup bucket",
+        "Automated lifecycle policy: STANDARD_IA (30d) → GLACIER (90d) → DEEP_ARCHIVE (180d), reducing storage costs by ~60%",
+        "Daily 3 AM cron job with full logging — zero manual intervention since deployment",
+        "Restore tested and validated — full DB recovery via mongorestore --archive --gzip in under 30 minutes",
+        "Separate backup pipelines for PROD and DEV/UAT environments with isolated S3 buckets",
+      ]},
   ];
 
   const achievements = [
