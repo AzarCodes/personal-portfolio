@@ -385,7 +385,7 @@ function ContactForm() {
           email: form.email,
           subject: form.subject,
           message: form.message,
-          from_name: "Portfolio Contact Form",
+          from_name: "Enquiry from Portfolio",
         }),
       });
       const data = await res.json();
