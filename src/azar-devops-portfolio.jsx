@@ -366,6 +366,85 @@ function ExperienceCard({ company, role, period, location, bullets, index, borde
   );
 }
 
+function ContactForm() {
+  const [form, setForm] = useState({ name:"", email:"", subject:"", message:"" });
+  const [status, setStatus] = useState("idle"); // idle | sending | success | error
+
+  const handleChange = e => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    setStatus("sending");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: "8718bc37-022e-42e1-a332-aaecac6e0080", // 🔑 Replace with your key from web3forms.com
+          name: form.name,
+          email: form.email,
+          subject: form.subject,
+          message: form.message,
+          from_name: "Portfolio Contact Form",
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus("success");
+        setForm({ name:"", email:"", subject:"", message:"" });
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  const inputStyle = { background:"rgba(255,255,255,0.04)", border:"1px solid rgba(255,255,255,0.1)" };
+  const inputClass = "w-full px-4 py-2.5 rounded-xl text-white text-sm focus:outline-none transition-colors";
+
+  if (status === "success") return (
+    <div className="text-center py-10">
+      <div className="text-4xl mb-3">✅</div>
+      <p className="text-white font-bold text-lg mb-1">Message Sent!</p>
+      <p className="text-slate-400 text-sm mb-6">I'll get back to you within 24 hours.</p>
+      <button onClick={() => setStatus("idle")} className="px-6 py-2 rounded-xl text-sm text-cyan-400 border border-cyan-400/30 hover:bg-cyan-400/10 transition-all">
+        Send Another
+      </button>
+    </div>
+  );
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      {[
+        { label:"Your Name",     name:"name",    placeholder:"John Doe",                    type:"text"  },
+        { label:"Email Address", name:"email",   placeholder:"john@company.com",            type:"email" },
+        { label:"Subject",       name:"subject", placeholder:"DevOps Engineer Opportunity", type:"text"  },
+      ].map(f => (
+        <div key={f.name}>
+          <label className="text-slate-400 text-xs font-medium mb-1.5 block">{f.label}</label>
+          <input required type={f.type} name={f.name} value={form[f.name]} onChange={handleChange}
+            placeholder={f.placeholder} className={inputClass} style={inputStyle} />
+        </div>
+      ))}
+      <div>
+        <label className="text-slate-400 text-xs font-medium mb-1.5 block">Message</label>
+        <textarea required rows={4} name="message" value={form.message} onChange={handleChange}
+          placeholder="Tell me about the opportunity..."
+          className={`${inputClass} resize-none`} style={inputStyle} />
+      </div>
+      {status === "error" && (
+        <p className="text-red-400 text-xs">Something went wrong. Please try again or email directly.</p>
+      )}
+      <button type="submit" disabled={status === "sending"}
+        className="w-full py-3 rounded-xl text-white font-bold flex items-center justify-center gap-2 transition-all hover:opacity-90 disabled:opacity-60"
+        style={{ background:"linear-gradient(to right,#06b6d4,#2563eb)", border:"none", cursor:"pointer" }}>
+        {status === "sending" ? "Sending…" : <><span>Send Message</span><IcoArrow /></>}
+      </button>
+    </form>
+  );
+}
+
 export default function Portfolio() {
   const [navOpen, setNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -410,18 +489,21 @@ export default function Portfolio() {
 
   const projects = [
     { title:"3-Tier Application on AWS",
+      github:"https://github.com/AzarCodes/MongoDB-Production-Backup-to-AWS-S3",
       desc:"Production-grade 3-tier web application with auto-scaling, load balancing, and RDS multi-AZ deployment.",
       arch:"Internet → ALB → EC2 ASG (App Layer) → RDS Multi-AZ\nS3 (Static) | CloudFront CDN | Route53 DNS | WAF",
       tech:["EC2","ALB","Auto Scaling","RDS","S3","CloudFront","Route53","Terraform"],
       gradientStyle:{ background:"linear-gradient(to right, #22d3ee, #2563eb)" },
       achievements:["99.99% uptime with multi-AZ and auto-scaling","CloudFront CDN reduced latency by 40%","Terraform IaC enables reproducible provisioning","WAF blocked OWASP Top 10 attack vectors"]},
     { title:"Scalable Microservices on EKS",
+      github:"https://github.com/AzarCodes/MongoDB-Production-Backup-to-AWS-S3",
       desc:"Kubernetes-native microservices on AWS EKS with Helm, HPA, and Prometheus/Grafana observability.",
       arch:"Ingress Controller → K8s Services → Pods (HPA)\nHelm | Prometheus + Grafana | ECR | EKS Cluster",
       tech:["EKS","Kubernetes","Helm","Docker","Prometheus","Grafana","ECR","IAM IRSA"],
       gradientStyle:{ background:"linear-gradient(to right, #a855f7, #ec4899)" },
       achievements:["15+ microservices with zero-downtime rolling updates","HPA scales pods 3x–10x automatically under load","Grafana dashboards for real-time visibility","Trivy blocked 3 critical CVEs before production"]},
     { title:"Serverless Automation — Lambda + EventBridge",
+      github:"https://github.com/AzarCodes/MongoDB-Production-Backup-to-AWS-S3",
       desc:"Event-driven serverless automation for scheduled maintenance, alerts, and cross-service orchestration.",
       arch:"EventBridge Rules → Lambda → SNS/SES/S3\nCloudWatch Logs | IAM Roles | Parameter Store | DLQ",
       tech:["Lambda","EventBridge","SNS","SES","Python","CloudWatch","IAM","SQS"],
@@ -784,30 +866,7 @@ export default function Portfolio() {
           <GlassCard className="p-8" hover={false}>
             <h3 className="text-xl font-bold text-white mb-2">Send a Message</h3>
             <p className="text-slate-500 text-sm mb-6">I typically respond within 24 hours.</p>
-            <div className="space-y-4">
-              {[
-                { label:"Your Name", placeholder:"John Doe", type:"text" },
-                { label:"Email Address", placeholder:"john@company.com", type:"email" },
-                { label:"Subject", placeholder:"DevOps Engineer Opportunity", type:"text" },
-              ].map(f => (
-                <div key={f.label}>
-                  <label className="text-slate-400 text-xs font-medium mb-1.5 block">{f.label}</label>
-                  <input type={f.type} placeholder={f.placeholder}
-                    className="w-full px-4 py-2.5 rounded-xl text-white text-sm focus:outline-none transition-colors"
-                    style={{ background:"rgba(255,255,255,0.04)", border:"1px solid rgba(255,255,255,0.1)" }} />
-                </div>
-              ))}
-              <div>
-                <label className="text-slate-400 text-xs font-medium mb-1.5 block">Message</label>
-                <textarea rows={4} placeholder="Tell me about the opportunity..."
-                  className="w-full px-4 py-2.5 rounded-xl text-white text-sm focus:outline-none transition-colors resize-none"
-                  style={{ background:"rgba(255,255,255,0.04)", border:"1px solid rgba(255,255,255,0.1)" }} />
-              </div>
-              <button className="w-full py-3 rounded-xl text-white font-bold flex items-center justify-center gap-2 transition-all hover:opacity-90"
-                style={{ background:"linear-gradient(to right,#06b6d4,#2563eb)", border:"none", cursor:"pointer" }}>
-                Send Message <IcoArrow />
-              </button>
-            </div>
+            <ContactForm />
           </GlassCard>
         </div>
       </Section>
@@ -833,7 +892,7 @@ export default function Portfolio() {
               </a>
             ))}
           </div>
-          <p className="text-slate-700 text-xs">© 2025 Azar S. Built with React + Tailwind CSS</p>
+          <p className="text-slate-700 text-xs">© 2026 Azar S. Built with React + Tailwind CSS</p>
         </div>
       </footer>
     </div>
