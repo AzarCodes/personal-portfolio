@@ -380,12 +380,12 @@ function ContactForm() {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          access_key: "8718bc37-022e-42e1-a332-aaecac6e0080", // 🔑 Replace with your key from web3forms.com
+          access_key: "YOUR_WEB3FORMS_ACCESS_KEY", // 🔑 Replace with your key from web3forms.com
           name: form.name,
           email: form.email,
           subject: form.subject,
           message: form.message,
-          from_name: "Enquiry from Portfolio",
+          from_name: "Portfolio Contact Form",
         }),
       });
       const data = await res.json();
@@ -662,10 +662,11 @@ export default function Portfolio() {
               style={{ background:"linear-gradient(to right,#06b6d4,#2563eb)", border:"none", cursor:"pointer" }}>
               View Projects <IcoArrow />
             </button>
-            <button className="px-6 py-3 rounded-xl text-white font-semibold flex items-center gap-2 transition-all"
-              style={{ background:"rgba(255,255,255,0.05)", border:"1px solid rgba(255,255,255,0.2)", cursor:"pointer" }}>
+            <a href="/AzarS_DevOps_Resume.pdf" download="AzarS_DevOps_Resume.pdf"
+              className="px-6 py-3 rounded-xl text-white font-semibold flex items-center gap-2 transition-all"
+              style={{ background:"rgba(255,255,255,0.05)", border:"1px solid rgba(255,255,255,0.2)", cursor:"pointer", textDecoration:"none" }}>
               <IcoDownload /> Download Resume
-            </button>
+            </a>
             <button onClick={() => scrollTo("contact")}
               className="px-6 py-3 rounded-xl text-purple-300 font-semibold transition-all"
               style={{ background:"rgba(168,85,247,0.05)", border:"1px solid rgba(168,85,247,0.3)", cursor:"pointer" }}>
@@ -892,7 +893,7 @@ export default function Portfolio() {
               </a>
             ))}
           </div>
-          <p className="text-slate-700 text-xs">© 2026 Azar S. Built with React + Tailwind CSS</p>
+          <p className="text-slate-700 text-xs">© 2025 Azar S. Built with React + Tailwind CSS</p>
         </div>
       </footer>
     </div>
