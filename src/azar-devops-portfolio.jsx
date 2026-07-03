@@ -476,7 +476,7 @@ export default function Portfolio() {
   ];
 
   const experiences = [
-    { company:"SPM Global Technologies (DealDox CPQ)", role:"DevOps Engineer", period:"Apr 2024 – Present", location:"Bengaluru, India",
+    { company:"SPM Global Technologies", role:"DevOps Engineer", period:"Apr 2024 – Present", location:"Bengaluru, India",
       borderColor:"#22d3ee", dotColor:"#22d3ee", index:0,
       bullets:["Architected and automated end-to-end CI/CD pipelines, cutting deployment cycle by 35%.","Managed and maintained 50+ EC2 servers with 99.99% uptime SLA adherence.","Configured CloudWatch dashboards and alarms for proactive production monitoring.","Built Lambda-based event-driven automation for routine operational tasks.","Designed comprehensive backup & DR strategy using S3 + lifecycle policies.","Wrote Python scripts for infrastructure automation and reporting."]},
     { company:"Simtekway Solutions", role:"DevOps / Cloud Engineer", period:"Jan 2024 – Mar 2024", location:"Bengaluru, India",
