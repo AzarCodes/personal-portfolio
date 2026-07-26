@@ -156,6 +156,103 @@ const IcoShield = () => (
   </svg>
 );
 
+
+function GitHubStats() {
+  const [stats, setStats] = useState(null);
+  const [repos, setRepos] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    Promise.all([
+      fetch("https://api.github.com/users/AzarCodes").then(r => r.json()),
+      fetch("https://api.github.com/users/AzarCodes/repos?per_page=100&sort=updated").then(r => r.json()),
+    ]).then(([user, repoList]) => {
+      setStats(user);
+      setRepos(Array.isArray(repoList) ? repoList : []);
+      setLoading(false);
+    }).catch(() => setLoading(false));
+  }, []);
+
+  const totalStars = repos.reduce((a, r) => a + (r.stargazers_count || 0), 0);
+  const totalForks = repos.reduce((a, r) => a + (r.forks_count || 0), 0);
+  const langMap = {};
+  repos.forEach(r => { if (r.language) langMap[r.language] = (langMap[r.language] || 0) + 1; });
+  const topLangs = Object.entries(langMap).sort((a, b) => b[1] - a[1]).slice(0, 6);
+  const langColors = { Python:"#3572A5", Shell:"#89e051", HCL:"#844FBA", Dockerfile:"#384d54", JavaScript:"#f1e05a", TypeScript:"#2b7489", YAML:"#cb171e", Go:"#00ADD8", Rust:"#dea584" };
+
+  if (loading) return (
+    <div className="w-full grid sm:grid-cols-2 gap-6">
+      {[1,2].map(i => (
+        <GlassCard key={i} className="p-6 flex flex-col gap-4" hover={false}>
+          <div className="h-3 w-32 rounded-full animate-pulse" style={{background:"rgba(255,255,255,0.08)"}} />
+          <div className="h-3 w-full rounded-full animate-pulse" style={{background:"rgba(255,255,255,0.05)"}} />
+          <div className="h-3 w-3/4 rounded-full animate-pulse" style={{background:"rgba(255,255,255,0.05)"}} />
+        </GlassCard>
+      ))}
+    </div>
+  );
+
+  return (
+    <div className="w-full grid sm:grid-cols-2 gap-6">
+      {/* GitHub Stats Card */}
+      <GlassCard className="p-6 flex flex-col gap-5" hover>
+        <p className="text-slate-500 text-xs font-mono uppercase tracking-widest">GitHub Stats</p>
+        <div className="flex items-center gap-4">
+          {stats?.avatar_url && <img src={stats.avatar_url} alt="avatar" className="w-14 h-14 rounded-full border-2 border-cyan-400/30" />}
+          <div>
+            <p className="text-white font-bold text-sm">{stats?.name || "AzarCodes"}</p>
+            <p className="text-slate-500 text-xs">@{stats?.login}</p>
+            <p className="text-slate-400 text-xs mt-1">{stats?.bio?.slice(0,60) || "Cloud Admin & DevOps Engineer"}</p>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          {[
+            { label:"Public Repos", value: stats?.public_repos ?? "—", color:"text-cyan-400" },
+            { label:"Followers",    value: stats?.followers    ?? "—", color:"text-purple-400" },
+            { label:"Total Stars",  value: totalStars,                 color:"text-yellow-400" },
+            { label:"Total Forks",  value: totalForks,                 color:"text-green-400" },
+          ].map(s => (
+            <div key={s.label} className="p-3 rounded-xl text-center" style={{background:"rgba(255,255,255,0.04)", border:"1px solid rgba(255,255,255,0.07)"}}>
+              <div className={`text-2xl font-black font-mono ${s.color}`}>{s.value}</div>
+              <div className="text-slate-500 text-xs mt-0.5">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </GlassCard>
+
+      {/* Top Languages Card */}
+      <GlassCard className="p-6 flex flex-col gap-5" hover>
+        <p className="text-slate-500 text-xs font-mono uppercase tracking-widest">Top Languages</p>
+        <div className="flex flex-col gap-3">
+          {topLangs.length > 0 ? topLangs.map(([lang, count]) => {
+            const pct = Math.round((count / repos.length) * 100);
+            const color = langColors[lang] || "#22d3ee";
+            return (
+              <div key={lang}>
+                <div className="flex justify-between text-xs mb-1">
+                  <span className="text-slate-300 font-medium flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full inline-block" style={{background: color}} />
+                    {lang}
+                  </span>
+                  <span className="text-slate-500 font-mono">{pct}%</span>
+                </div>
+                <div className="h-1.5 rounded-full overflow-hidden" style={{background:"rgba(255,255,255,0.08)"}}>
+                  <div className="h-full rounded-full transition-all duration-700" style={{width:`${pct}%`, background: color}} />
+                </div>
+              </div>
+            );
+          }) : (
+            <p className="text-slate-500 text-sm">No language data available</p>
+          )}
+        </div>
+        <div className="mt-auto pt-3 border-t border-white/10">
+          <p className="text-slate-600 text-xs">{repos.length} public repositories analysed</p>
+        </div>
+      </GlassCard>
+    </div>
+  );
+}
+
 function AnimatedBg() {
   const canvasRef = useRef(null);
   useEffect(() => {
@@ -827,26 +924,7 @@ export default function Portfolio() {
       <Section id="github">
         <SectionTitle eyebrow="Open Source" title="GitHub Contributions" subtitle="My coding activity, projects, and open source work" />
         <div className="flex flex-col items-center gap-6">
-          <div className="w-full grid sm:grid-cols-2 gap-6">
-            <GlassCard className="p-4 flex flex-col items-center gap-3" hover>
-              <p className="text-slate-500 text-xs font-mono uppercase tracking-widest">GitHub Stats</p>
-              <img
-                src="https://github-readme-stats.vercel.app/api?username=AzarCodes&show_icons=true&theme=dark&hide_border=true&title_color=22d3ee&icon_color=22d3ee&text_color=94a3b8&bg_color=0d1117&count_private=true"
-                alt="Azar's GitHub Stats"
-                className="w-full rounded-xl"
-                loading="lazy"
-              />
-            </GlassCard>
-            <GlassCard className="p-4 flex flex-col items-center gap-3" hover>
-              <p className="text-slate-500 text-xs font-mono uppercase tracking-widest">Top Languages</p>
-              <img
-                src="https://github-readme-stats.vercel.app/api/top-langs/?username=AzarCodes&layout=compact&theme=dark&hide_border=true&title_color=22d3ee&text_color=94a3b8&bg_color=0d1117"
-                alt="Top Languages"
-                className="w-full rounded-xl"
-                loading="lazy"
-              />
-            </GlassCard>
-          </div>
+          <GitHubStats />
           <GlassCard className="p-6 w-full flex flex-col items-center gap-3" hover={false}>
             <p className="text-slate-500 text-xs font-mono uppercase tracking-widest">Contribution Graph</p>
             <img
