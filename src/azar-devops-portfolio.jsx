@@ -459,7 +459,7 @@ export default function Portfolio() {
   const navLinks = [
     { id:"about", label:"About" },{ id:"skills", label:"Skills" },{ id:"experience", label:"Experience" },
     { id:"projects", label:"Projects" },{ id:"achievements", label:"Achievements" },
-    { id:"certifications", label:"Certifications" },{ id:"contact", label:"Contact" },
+    { id:"certifications", label:"Certifications" },{ id:"github", label:"GitHub" },{ id:"contact", label:"Contact" },
   ];
 
   const scrollTo = (id) => { document.getElementById(id)?.scrollIntoView({ behavior:"smooth" }); setNavOpen(false); };
@@ -820,6 +820,51 @@ export default function Portfolio() {
               <p className="text-slate-600 text-xs mt-1">{c.provider}</p>
             </GlassCard>
           ))}
+        </div>
+      </Section>
+
+      {/* GITHUB */}
+      <Section id="github">
+        <SectionTitle eyebrow="Open Source" title="GitHub Contributions" subtitle="My coding activity, projects, and open source work" />
+        <div className="flex flex-col items-center gap-6">
+          <div className="w-full grid sm:grid-cols-2 gap-6">
+            <GlassCard className="p-4 flex flex-col items-center gap-3" hover>
+              <p className="text-slate-500 text-xs font-mono uppercase tracking-widest">GitHub Stats</p>
+              <img
+                src="https://github-readme-stats.vercel.app/api?username=AzarCodes&show_icons=true&theme=transparent&hide_border=true&title_color=22d3ee&icon_color=22d3ee&text_color=94a3b8&bg_color=00000000"
+                alt="Azar's GitHub Stats"
+                className="w-full rounded-xl"
+                loading="lazy"
+              />
+            </GlassCard>
+            <GlassCard className="p-4 flex flex-col items-center gap-3" hover>
+              <p className="text-slate-500 text-xs font-mono uppercase tracking-widest">Contribution Streak</p>
+              <img
+                src="https://github-readme-streak-stats.herokuapp.com/?user=AzarCodes&theme=transparent&hide_border=true&stroke=22d3ee&ring=22d3ee&fire=7b2fff&currStreakLabel=22d3ee&sideLabels=94a3b8&dates=94a3b8&currStreakNum=ffffff&sideNums=ffffff"
+                alt="GitHub Streak"
+                className="w-full rounded-xl"
+                loading="lazy"
+              />
+            </GlassCard>
+          </div>
+          <GlassCard className="p-6 w-full flex flex-col items-center gap-3" hover={false}>
+            <p className="text-slate-500 text-xs font-mono uppercase tracking-widest">Contribution Graph</p>
+            <img
+              src="https://ghchart.rshah.org/22d3ee/AzarCodes"
+              alt="GitHub Contribution Graph"
+              className="w-full max-w-3xl rounded-xl"
+              loading="lazy"
+            />
+          </GlassCard>
+          <a
+            href="https://github.com/AzarCodes"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-cyan-400 font-semibold text-sm transition-all hover:opacity-80"
+            style={{ background:"rgba(0,212,255,0.08)", border:"1px solid rgba(0,212,255,0.3)", textDecoration:"none" }}
+          >
+            <IcoGithub /> View All Repositories
+          </a>
         </div>
       </Section>
 
