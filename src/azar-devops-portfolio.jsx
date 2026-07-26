@@ -831,17 +831,17 @@ export default function Portfolio() {
             <GlassCard className="p-4 flex flex-col items-center gap-3" hover>
               <p className="text-slate-500 text-xs font-mono uppercase tracking-widest">GitHub Stats</p>
               <img
-                src="https://github-readme-stats.vercel.app/api?username=AzarCodes&show_icons=true&theme=transparent&hide_border=true&title_color=22d3ee&icon_color=22d3ee&text_color=94a3b8&bg_color=00000000"
+                src="https://github-readme-stats.vercel.app/api?username=AzarCodes&show_icons=true&theme=dark&hide_border=true&title_color=22d3ee&icon_color=22d3ee&text_color=94a3b8&bg_color=0d1117&count_private=true"
                 alt="Azar's GitHub Stats"
                 className="w-full rounded-xl"
                 loading="lazy"
               />
             </GlassCard>
             <GlassCard className="p-4 flex flex-col items-center gap-3" hover>
-              <p className="text-slate-500 text-xs font-mono uppercase tracking-widest">Contribution Streak</p>
+              <p className="text-slate-500 text-xs font-mono uppercase tracking-widest">Top Languages</p>
               <img
-                src="https://github-readme-streak-stats.herokuapp.com/?user=AzarCodes&theme=transparent&hide_border=true&stroke=22d3ee&ring=22d3ee&fire=7b2fff&currStreakLabel=22d3ee&sideLabels=94a3b8&dates=94a3b8&currStreakNum=ffffff&sideNums=ffffff"
-                alt="GitHub Streak"
+                src="https://github-readme-stats.vercel.app/api/top-langs/?username=AzarCodes&layout=compact&theme=dark&hide_border=true&title_color=22d3ee&text_color=94a3b8&bg_color=0d1117"
+                alt="Top Languages"
                 className="w-full rounded-xl"
                 loading="lazy"
               />
