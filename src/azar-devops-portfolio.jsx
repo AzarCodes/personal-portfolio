@@ -555,8 +555,8 @@ export default function Portfolio() {
 
   const navLinks = [
     { id:"about", label:"About" },{ id:"skills", label:"Skills" },{ id:"experience", label:"Experience" },
-    { id:"projects", label:"Projects" },{ id:"achievements", label:"Achievements" },
-    { id:"certifications", label:"Certifications" },{ id:"github", label:"GitHub" },{ id:"contact", label:"Contact" },
+    { id:"projects", label:"Projects" },{ id:"github", label:"GitHub" },
+    { id:"achievements", label:"Achievements" },{ id:"certifications", label:"Certifications" },{ id:"contact", label:"Contact" },
   ];
 
   const scrollTo = (id) => { document.getElementById(id)?.scrollIntoView({ behavior:"smooth" }); setNavOpen(false); };
@@ -863,6 +863,32 @@ export default function Portfolio() {
         </div>
       </Section>
 
+      {/* GITHUB */}
+      <Section id="github">
+        <SectionTitle eyebrow="Open Source" title="GitHub Activity" subtitle="Live stats pulled directly from GitHub API" />
+        <div className="flex flex-col items-center gap-6">
+          <GitHubStats />
+          <GlassCard className="p-6 w-full flex flex-col items-center gap-3" hover={false}>
+            <p className="text-slate-500 text-xs font-mono uppercase tracking-widest">Contribution Graph</p>
+            <img
+              src="https://ghchart.rshah.org/22d3ee/AzarCodes"
+              alt="GitHub Contribution Graph"
+              className="w-full max-w-3xl rounded-xl"
+              loading="lazy"
+            />
+          </GlassCard>
+          <a
+            href="https://github.com/AzarCodes"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-cyan-400 font-semibold text-sm transition-all hover:opacity-80"
+            style={{ background:"rgba(0,212,255,0.08)", border:"1px solid rgba(0,212,255,0.3)", textDecoration:"none" }}
+          >
+            <IcoGithub /> View All Repositories
+          </a>
+        </div>
+      </Section>
+
       {/* ACHIEVEMENTS */}
       <Section id="achievements">
         <SectionTitle eyebrow="Impact" title="Key Achievements" subtitle="Measurable results from real production environments" />
@@ -899,7 +925,7 @@ export default function Portfolio() {
 
       {/* CERTIFICATIONS */}
       <Section id="certifications">
-        <SectionTitle eyebrow="Credentials" title="Certifications" subtitle="Current and upcoming professional certifications" />
+        <SectionTitle eyebrow="Credentials" title="Certifications" subtitle="Actively pursuing top cloud & DevOps certifications" />
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {certifications.map((c, i) => (
             <GlassCard key={i} className="p-6 text-center group hover-lift" hover={false}>
@@ -908,8 +934,8 @@ export default function Portfolio() {
               </div>
               <span className="text-xs font-bold px-2 py-0.5 rounded-full mb-3 inline-block"
                 style={c.status === "In Progress"
-                  ? { background:"rgba(250,204,21,0.1)", color:"#facc15", border:"1px solid rgba(250,204,21,0.2)" }
-                  : { background:"rgba(148,163,184,0.1)", color:"#94a3b8", border:"1px solid rgba(148,163,184,0.2)" }}>
+                  ? { background:"rgba(0,212,255,0.1)", color:"#22d3ee", border:"1px solid rgba(0,212,255,0.3)" }
+                  : { background:"rgba(168,85,247,0.08)", color:"#a78bfa", border:"1px solid rgba(168,85,247,0.2)" }}>
                 {c.status}
               </span>
               <h3 className="text-white font-bold text-sm mb-1 leading-snug">{c.title}</h3>
@@ -917,32 +943,6 @@ export default function Portfolio() {
               <p className="text-slate-600 text-xs mt-1">{c.provider}</p>
             </GlassCard>
           ))}
-        </div>
-      </Section>
-
-      {/* GITHUB */}
-      <Section id="github">
-        <SectionTitle eyebrow="Open Source" title="GitHub Contributions" subtitle="My coding activity, projects, and open source work" />
-        <div className="flex flex-col items-center gap-6">
-          <GitHubStats />
-          <GlassCard className="p-6 w-full flex flex-col items-center gap-3" hover={false}>
-            <p className="text-slate-500 text-xs font-mono uppercase tracking-widest">Contribution Graph</p>
-            <img
-              src="https://ghchart.rshah.org/22d3ee/AzarCodes"
-              alt="GitHub Contribution Graph"
-              className="w-full max-w-3xl rounded-xl"
-              loading="lazy"
-            />
-          </GlassCard>
-          <a
-            href="https://github.com/AzarCodes?tab=repositories"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-cyan-400 font-semibold text-sm transition-all hover:opacity-80"
-            style={{ background:"rgba(0,212,255,0.08)", border:"1px solid rgba(0,212,255,0.3)", textDecoration:"none" }}
-          >
-            <IcoGithub /> View All Repositories
-          </a>
         </div>
       </Section>
 
