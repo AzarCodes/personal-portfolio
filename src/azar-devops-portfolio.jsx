@@ -935,7 +935,7 @@ export default function Portfolio() {
             />
           </GlassCard>
           <a
-            href="https://github.com/AzarCodes"
+            href="https://github.com/AzarCodes?tab=repositories"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-cyan-400 font-semibold text-sm transition-all hover:opacity-80"
