@@ -858,7 +858,7 @@ export default function Portfolio() {
                     { icon:<IcoZap />,      pos:{ left:"85.36%", top:"85.36%" }, color:"#f0b429" },
                     { icon:<IcoServer />,   pos:{ left:"14.64%", top:"85.36%" }, color:"#7B2FFF" },
                   ].map((b, i) => (
-                    <div key={i} className="orbit-badge" style={{ position:"absolute", ...b.pos, transform:"translate(-50%,-50%)", color:b.color }}>{b.icon}</div>
+                    <div key={i} className="orbit-badge" style={{ position:"absolute", ...b.pos, marginLeft:-28, marginTop:-28, color:b.color }}>{b.icon}</div>
                   ))}
                 </div>
                 {/* inner ring */}
@@ -869,7 +869,7 @@ export default function Portfolio() {
                     { icon:<IcoK8s />,    pos:{ left:"50%", top:"100%" } },
                     { icon:<IcoTf />,     pos:{ left:"0%", top:"50%" } },
                   ].map((b, i) => (
-                    <div key={i} className="orbit-badge" style={{ position:"absolute", ...b.pos, transform:"translate(-50%,-50%)" }}>{b.icon}</div>
+                    <div key={i} className="orbit-badge" style={{ position:"absolute", ...b.pos, marginLeft:-28, marginTop:-28 }}>{b.icon}</div>
                   ))}
                 </div>
                 {/* center — photo (drop your photo at public/azar.png) */}
