@@ -866,19 +866,19 @@ export default function Portfolio() {
                   )}
                 </div>
 
-                {/* floating badges — fixed positions around the person, never on the face (TWS style) */}
-                <div style={{ position:"absolute", inset:0, zIndex:3, pointerEvents:"none" }}>
+                {/* orbiting badges — all on the large outer ring, whose path clears the face (rotating, icons stay upright) */}
+                <div className="orbit-ring-2" style={{ position:"absolute", left:20, top:30, width:600, height:600, borderRadius:"50%", zIndex:3, pointerEvents:"none" }}>
                   {[
-                    { src:"/icons/aws.svg",        alt:"AWS",        left:"9%",  top:"16%", dur:"6s",  delay:"0s"   },
-                    { src:"/icons/kubernetes.svg", alt:"Kubernetes", left:"28%", top:"5%",  dur:"7s",  delay:"0.8s" },
-                    { src:"/icons/github.svg",     alt:"GitHub",     left:"79%", top:"11%", dur:"8s",  delay:"0.4s" },
-                    { src:"/icons/docker.svg",     alt:"Docker",     left:"5%",  top:"45%", dur:"7s",  delay:"1.2s" },
-                    { src:"/icons/terraform.svg",  alt:"Terraform",  left:"91%", top:"40%", dur:"6s",  delay:"0.6s" },
-                    { src:"/icons/ansible.svg",    alt:"Ansible",    left:"10%", top:"76%", dur:"8s",  delay:"1.6s" },
-                    { src:"/icons/chatgpt.svg",    alt:"ChatGPT",    left:"88%", top:"72%", dur:"7s",  delay:"0.2s" },
-                    { src:"/icons/argocd.svg",     alt:"Argo CD",    left:"68%", top:"88%", dur:"6s",  delay:"1s"   },
+                    { src:"/icons/kubernetes.svg", alt:"Kubernetes", pos:{ left:"50%",    top:"0%"     } },
+                    { src:"/icons/github.svg",     alt:"GitHub",     pos:{ left:"85.36%", top:"14.64%" } },
+                    { src:"/icons/terraform.svg",  alt:"Terraform",  pos:{ left:"100%",   top:"50%"    } },
+                    { src:"/icons/chatgpt.svg",    alt:"ChatGPT",    pos:{ left:"85.36%", top:"85.36%" } },
+                    { src:"/icons/argocd.svg",     alt:"Argo CD",    pos:{ left:"50%",    top:"100%"   } },
+                    { src:"/icons/ansible.svg",    alt:"Ansible",    pos:{ left:"14.64%", top:"85.36%" } },
+                    { src:"/icons/docker.svg",     alt:"Docker",     pos:{ left:"0%",     top:"50%"    } },
+                    { src:"/icons/aws.svg",        alt:"AWS",        pos:{ left:"14.64%", top:"14.64%" } },
                   ].map((b, i) => (
-                    <div key={i} className="orbit-badge" style={{ position:"absolute", left:b.left, top:b.top, marginLeft:-28, marginTop:-28, animation:`floatY ${b.dur} ${b.delay} ease-in-out infinite alternate` }}>
+                    <div key={i} className="orbit-badge" style={{ position:"absolute", ...b.pos, marginLeft:-28, marginTop:-28 }}>
                       <img src={b.src} alt={b.alt} style={{ width:32, height:32, objectFit:"contain" }} />
                     </div>
                   ))}
