@@ -847,11 +847,28 @@ export default function Portfolio() {
               </div>
             </div>
 
-            {/* RIGHT — orbiting tech icons around photo */}
-            <div className="hidden lg:flex items-center justify-center relative" style={{ minHeight:560 }}>
-              <div style={{ position:"relative", width:540, height:540 }}>
-                {/* outer ring */}
-                <div className="orbit-ring-2" style={{ position:"absolute", inset:20, borderRadius:"50%", border:"1.5px dashed rgba(143,176,245,0.25)" }}>
+            {/* RIGHT — TWS-style large cutout with orbiting icons */}
+            <div className="hidden lg:flex items-end justify-center relative self-end" style={{ minHeight:620 }}>
+              <div style={{ position:"relative", width:560, height:620 }}>
+
+                {/* dashed rings — BEHIND the person */}
+                <div className="orbit-ring-2" style={{ position:"absolute", left:20, top:40, width:520, height:520, borderRadius:"50%", border:"1.5px dashed rgba(143,176,245,0.28)", zIndex:1 }} />
+                <div className="orbit-ring-1" style={{ position:"absolute", left:100, top:120, width:360, height:360, borderRadius:"50%", border:"1.5px dashed rgba(143,176,245,0.38)", zIndex:1 }} />
+
+                {/* person cutout — anchored to bottom, in front of rings */}
+                <div style={{ position:"absolute", bottom:0, left:"50%", marginLeft:-205, width:410, zIndex:2 }}>
+                  {photoOk ? (
+                    <img src="/azar-cutout.png" alt="Azar S" onError={() => setPhotoOk(false)}
+                      style={{ width:"100%", display:"block", filter:"drop-shadow(0 0 45px rgba(88,52,190,0.55))" }} />
+                  ) : (
+                    <div className="font-display" style={{ width:220, height:220, margin:"0 auto", borderRadius:"50%", display:"flex", alignItems:"center", justifyContent:"center", fontSize:64, fontWeight:700, color:"#fff", background:"linear-gradient(135deg,#2b2be0,#7B2FFF)", boxShadow:"0 0 60px rgba(88,52,190,0.5)" }}>
+                      AS
+                    </div>
+                  )}
+                </div>
+
+                {/* orbiting badges — ABOVE the person (borderless duplicate rings, same animation = stays in sync) */}
+                <div className="orbit-ring-2" style={{ position:"absolute", left:20, top:40, width:520, height:520, borderRadius:"50%", zIndex:3, pointerEvents:"none" }}>
                   {[
                     { icon:<IcoGithub />,   pos:{ left:"14.64%", top:"14.64%" }, color:"#000" },
                     { icon:<IcoShield />,   pos:{ left:"85.36%", top:"14.64%" }, color:"#16a34a" },
@@ -861,8 +878,7 @@ export default function Portfolio() {
                     <div key={i} className="orbit-badge" style={{ position:"absolute", ...b.pos, marginLeft:-28, marginTop:-28, color:b.color }}>{b.icon}</div>
                   ))}
                 </div>
-                {/* inner ring */}
-                <div className="orbit-ring-1" style={{ position:"absolute", inset:105, borderRadius:"50%", border:"1.5px dashed rgba(143,176,245,0.35)" }}>
+                <div className="orbit-ring-1" style={{ position:"absolute", left:100, top:120, width:360, height:360, borderRadius:"50%", zIndex:3, pointerEvents:"none" }}>
                   {[
                     { icon:<IcoAws />,    pos:{ left:"50%", top:"0%" } },
                     { icon:<IcoDocker />, pos:{ left:"100%", top:"50%" } },
@@ -872,19 +888,9 @@ export default function Portfolio() {
                     <div key={i} className="orbit-badge" style={{ position:"absolute", ...b.pos, marginLeft:-28, marginTop:-28 }}>{b.icon}</div>
                   ))}
                 </div>
-                {/* center — photo (drop your photo at public/azar.png) */}
-                <div style={{ position:"absolute", inset:190, borderRadius:"50%", overflow:"hidden", border:"3px solid rgba(143,176,245,0.4)", boxShadow:"0 0 60px rgba(88,52,190,0.5)" }}>
-                  {photoOk ? (
-                    <img src="/azar.png" alt="Azar S" onError={() => setPhotoOk(false)}
-                      style={{ width:"100%", height:"100%", objectFit:"cover" }} />
-                  ) : (
-                    <div className="font-display" style={{ width:"100%", height:"100%", display:"flex", alignItems:"center", justifyContent:"center", fontSize:56, fontWeight:700, color:"#fff", background:"linear-gradient(135deg,#2b2be0,#7B2FFF)" }}>
-                      AS
-                    </div>
-                  )}
-                </div>
               </div>
             </div>
+
           </div>
 
           {/* Stats row */}
