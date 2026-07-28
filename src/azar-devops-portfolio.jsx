@@ -65,17 +65,6 @@ const IcoTf = () => (
     <path d="M26 8.5 L26 22 L20 25.5" stroke="#7B42BC" strokeWidth="1.5" strokeLinecap="round"/>
   </svg>
 );
-const IcoDocker = () => (
-  <svg viewBox="0 0 40 40" fill="none" style={{width:30,height:30}}>
-    <rect x="8" y="17" width="5" height="5" rx="0.5" fill="#2496ED"/>
-    <rect x="14" y="17" width="5" height="5" rx="0.5" fill="#2496ED"/>
-    <rect x="20" y="17" width="5" height="5" rx="0.5" fill="#2496ED"/>
-    <rect x="14" y="11" width="5" height="5" rx="0.5" fill="#2496ED"/>
-    <rect x="20" y="11" width="5" height="5" rx="0.5" fill="#2496ED"/>
-    <rect x="20" y="5" width="5" height="5" rx="0.5" fill="#2496ED"/>
-    <path d="M4 24 C4 30 10 34 18 34 C28 34 34 28 36 22 C38 22 39 20 38.5 18.5 C37 17.5 34 18 32 19 C31 16 29 14.5 27 14 C26.5 16.5 27 19 29 21 L4 21 Z" stroke="#2496ED" strokeWidth="1.5" fill="none"/>
-  </svg>
-);
 const IcoWhatsApp = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" style={{width:24,height:24}}>
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
@@ -870,22 +859,26 @@ export default function Portfolio() {
                 {/* orbiting badges — ABOVE the person (borderless duplicate rings, same animation = stays in sync) */}
                 <div className="orbit-ring-2" style={{ position:"absolute", left:20, top:40, width:520, height:520, borderRadius:"50%", zIndex:3, pointerEvents:"none" }}>
                   {[
-                    { icon:<IcoGithub />,   pos:{ left:"14.64%", top:"14.64%" }, color:"#000" },
-                    { icon:<IcoShield />,   pos:{ left:"85.36%", top:"14.64%" }, color:"#16a34a" },
-                    { icon:<IcoZap />,      pos:{ left:"85.36%", top:"85.36%" }, color:"#f0b429" },
-                    { icon:<IcoServer />,   pos:{ left:"14.64%", top:"85.36%" }, color:"#7B2FFF" },
+                    { src:"/icons/chatgpt.svg", alt:"ChatGPT",  pos:{ left:"14.64%", top:"14.64%" } },
+                    { src:"/icons/argocd.svg",  alt:"Argo CD",  pos:{ left:"85.36%", top:"14.64%" } },
+                    { src:"/icons/aws.svg",     alt:"AWS",      pos:{ left:"85.36%", top:"85.36%" } },
+                    { src:"/icons/github.svg",  alt:"GitHub",   pos:{ left:"14.64%", top:"85.36%" } },
                   ].map((b, i) => (
-                    <div key={i} className="orbit-badge" style={{ position:"absolute", ...b.pos, marginLeft:-28, marginTop:-28, color:b.color }}>{b.icon}</div>
+                    <div key={i} className="orbit-badge" style={{ position:"absolute", ...b.pos, marginLeft:-28, marginTop:-28 }}>
+                      <img src={b.src} alt={b.alt} style={{ width:32, height:32, objectFit:"contain" }} />
+                    </div>
                   ))}
                 </div>
                 <div className="orbit-ring-1" style={{ position:"absolute", left:100, top:120, width:360, height:360, borderRadius:"50%", zIndex:3, pointerEvents:"none" }}>
                   {[
-                    { icon:<IcoAws />,    pos:{ left:"50%", top:"0%" } },
-                    { icon:<IcoDocker />, pos:{ left:"100%", top:"50%" } },
-                    { icon:<IcoK8s />,    pos:{ left:"50%", top:"100%" } },
-                    { icon:<IcoTf />,     pos:{ left:"0%", top:"50%" } },
+                    { src:"/icons/docker.svg",     alt:"Docker",     pos:{ left:"50%", top:"0%" } },
+                    { src:"/icons/kubernetes.svg", alt:"Kubernetes", pos:{ left:"100%", top:"50%" } },
+                    { src:"/icons/terraform.svg",  alt:"Terraform",  pos:{ left:"50%", top:"100%" } },
+                    { src:"/icons/ansible.svg",    alt:"Ansible",    pos:{ left:"0%", top:"50%" } },
                   ].map((b, i) => (
-                    <div key={i} className="orbit-badge" style={{ position:"absolute", ...b.pos, marginLeft:-28, marginTop:-28 }}>{b.icon}</div>
+                    <div key={i} className="orbit-badge" style={{ position:"absolute", ...b.pos, marginLeft:-28, marginTop:-28 }}>
+                      <img src={b.src} alt={b.alt} style={{ width:32, height:32, objectFit:"contain" }} />
+                    </div>
                   ))}
                 </div>
               </div>
