@@ -847,7 +847,7 @@ export default function Portfolio() {
             </div>
 
             {/* RIGHT — TWS-style large cutout with orbiting icons */}
-            <div className="hidden lg:flex items-end justify-center relative align-center h-[100%]" style={{ minHeight:700 }}>
+            <div className="hidden lg:flex items-end justify-center relative items-center h-[100%]" style={{ minHeight:700 }}>
               <div style={{ position:"relative", width:640, height:700 }}>
 
                 {/* dashed rings — BEHIND the person */}
