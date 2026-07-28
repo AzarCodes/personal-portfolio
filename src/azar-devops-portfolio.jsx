@@ -643,12 +643,12 @@ export default function Portfolio() {
   ];
 
   return (
-    <div className="min-h-screen text-white relative" style={{ background:"radial-gradient(ellipse 80% 60% at 70% 20%, rgba(76,42,165,0.35) 0%, transparent 55%), radial-gradient(ellipse 70% 60% at 20% 80%, rgba(43,30,110,0.3) 0%, transparent 55%), #050512", fontFamily:"'Poppins', 'DM Sans', system-ui, sans-serif" }}>
+    <div className="min-h-screen text-white relative" style={{ background:"#000000", fontFamily:"'Poppins', 'DM Sans', system-ui, sans-serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Comfortaa:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap');
         * { box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { background: #050512 !important; margin: 0; }
+        body { background: #000000 !important; margin: 0; }
         /* ---- TrainWithShubham-style theme overrides ---- */
         .font-display { font-family: 'Comfortaa', 'Poppins', sans-serif; }
         .tws-gold { color: #f0b429; }
@@ -866,27 +866,19 @@ export default function Portfolio() {
                   )}
                 </div>
 
-                {/* orbiting badges — ABOVE the person (borderless duplicate rings, same animation = stays in sync) */}
-                <div className="orbit-ring-2" style={{ position:"absolute", left:20, top:30, width:600, height:600, borderRadius:"50%", zIndex:3, pointerEvents:"none" }}>
+                {/* floating badges — fixed positions around the person, never on the face (TWS style) */}
+                <div style={{ position:"absolute", inset:0, zIndex:3, pointerEvents:"none" }}>
                   {[
-                    { src:"/icons/chatgpt.svg", alt:"ChatGPT",  pos:{ left:"14.64%", top:"14.64%" } },
-                    { src:"/icons/argocd.svg",  alt:"Argo CD",  pos:{ left:"85.36%", top:"14.64%" } },
-                    { src:"/icons/aws.svg",     alt:"AWS",      pos:{ left:"85.36%", top:"85.36%" } },
-                    { src:"/icons/github.svg",  alt:"GitHub",   pos:{ left:"14.64%", top:"85.36%" } },
+                    { src:"/icons/aws.svg",        alt:"AWS",        left:"9%",  top:"16%", dur:"6s",  delay:"0s"   },
+                    { src:"/icons/kubernetes.svg", alt:"Kubernetes", left:"28%", top:"5%",  dur:"7s",  delay:"0.8s" },
+                    { src:"/icons/github.svg",     alt:"GitHub",     left:"79%", top:"11%", dur:"8s",  delay:"0.4s" },
+                    { src:"/icons/docker.svg",     alt:"Docker",     left:"5%",  top:"45%", dur:"7s",  delay:"1.2s" },
+                    { src:"/icons/terraform.svg",  alt:"Terraform",  left:"91%", top:"40%", dur:"6s",  delay:"0.6s" },
+                    { src:"/icons/ansible.svg",    alt:"Ansible",    left:"10%", top:"76%", dur:"8s",  delay:"1.6s" },
+                    { src:"/icons/chatgpt.svg",    alt:"ChatGPT",    left:"88%", top:"72%", dur:"7s",  delay:"0.2s" },
+                    { src:"/icons/argocd.svg",     alt:"Argo CD",    left:"68%", top:"88%", dur:"6s",  delay:"1s"   },
                   ].map((b, i) => (
-                    <div key={i} className="orbit-badge" style={{ position:"absolute", ...b.pos, marginLeft:-28, marginTop:-28 }}>
-                      <img src={b.src} alt={b.alt} style={{ width:32, height:32, objectFit:"contain" }} />
-                    </div>
-                  ))}
-                </div>
-                <div className="orbit-ring-1" style={{ position:"absolute", left:110, top:120, width:420, height:420, borderRadius:"50%", zIndex:3, pointerEvents:"none" }}>
-                  {[
-                    { src:"/icons/docker.svg",     alt:"Docker",     pos:{ left:"50%", top:"0%" } },
-                    { src:"/icons/kubernetes.svg", alt:"Kubernetes", pos:{ left:"100%", top:"50%" } },
-                    { src:"/icons/terraform.svg",  alt:"Terraform",  pos:{ left:"50%", top:"100%" } },
-                    { src:"/icons/ansible.svg",    alt:"Ansible",    pos:{ left:"0%", top:"50%" } },
-                  ].map((b, i) => (
-                    <div key={i} className="orbit-badge" style={{ position:"absolute", ...b.pos, marginLeft:-28, marginTop:-28 }}>
+                    <div key={i} className="orbit-badge" style={{ position:"absolute", left:b.left, top:b.top, marginLeft:-28, marginTop:-28, animation:`floatY ${b.dur} ${b.delay} ease-in-out infinite alternate` }}>
                       <img src={b.src} alt={b.alt} style={{ width:32, height:32, objectFit:"contain" }} />
                     </div>
                   ))}
