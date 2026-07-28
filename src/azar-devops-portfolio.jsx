@@ -760,7 +760,7 @@ export default function Portfolio() {
       </nav>
 
       {/* HERO — TrainWithShubham style */}
-      <section id="home" className="relative min-h-screen flex items-center px-4 overflow-hidden pt-28 pb-16"
+      <section id="home" className="relative min-h-screen flex items-center px-4 overflow-hidden pt-28 pb-0"
         style={{ background:"radial-gradient(ellipse 60% 70% at 72% 45%, rgba(88,52,190,0.28) 0%, transparent 65%)" }}>
         <div className="relative max-w-7xl mx-auto w-full" style={{ zIndex:2 }}>
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -834,21 +834,31 @@ export default function Portfolio() {
                   <IcoDownload /> Download Resume
                 </a>
               </div>
+
+              {/* Stats row */}
+              <div className="mt-10 mb-14 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-xl">
+                {[{n:"3.2+",l:"Years Exp."},{n:"50+",l:"Servers"},{n:"99.99%",l:"Uptime"},{n:"35%",l:"Faster Deploys"}].map(s => (
+                  <div key={s.l} className="p-3 text-center rounded-2xl" style={{ background:"rgba(255,255,255,0.03)", border:"1px solid rgba(255,255,255,0.08)" }}>
+                    <div className="text-xl font-black tws-blue">{s.n}</div>
+                    <div className="text-slate-500 text-xs mt-0.5">{s.l}</div>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* RIGHT — TWS-style large cutout with orbiting icons */}
-            <div className="hidden lg:flex items-end justify-center relative self-end" style={{ minHeight:620 }}>
-              <div style={{ position:"relative", width:560, height:620 }}>
+            <div className="hidden lg:flex items-end justify-center relative self-end" style={{ minHeight:700 }}>
+              <div style={{ position:"relative", width:640, height:700 }}>
 
                 {/* dashed rings — BEHIND the person */}
-                <div className="orbit-ring-2" style={{ position:"absolute", left:20, top:40, width:520, height:520, borderRadius:"50%", border:"1.5px dashed rgba(143,176,245,0.28)", zIndex:1 }} />
-                <div className="orbit-ring-1" style={{ position:"absolute", left:100, top:120, width:360, height:360, borderRadius:"50%", border:"1.5px dashed rgba(143,176,245,0.38)", zIndex:1 }} />
+                <div className="orbit-ring-2" style={{ position:"absolute", left:20, top:30, width:600, height:600, borderRadius:"50%", border:"1.5px dashed rgba(143,176,245,0.28)", zIndex:1 }} />
+                <div className="orbit-ring-1" style={{ position:"absolute", left:110, top:120, width:420, height:420, borderRadius:"50%", border:"1.5px dashed rgba(143,176,245,0.38)", zIndex:1 }} />
 
                 {/* person cutout — anchored to bottom, in front of rings */}
-                <div style={{ position:"absolute", bottom:0, left:"50%", marginLeft:-205, width:410, zIndex:2 }}>
+                <div style={{ position:"absolute", bottom:0, left:"50%", marginLeft:-280, width:560, zIndex:2 }}>
                   {photoOk ? (
                     <img src="/azar-cutout.png" alt="Azar S" onError={() => setPhotoOk(false)}
-                      style={{ width:"100%", display:"block", filter:"drop-shadow(0 0 45px rgba(88,52,190,0.55))" }} />
+                      style={{ width:"100%", display:"block", filter:"drop-shadow(0 0 55px rgba(88,52,190,0.55))" }} />
                   ) : (
                     <div className="font-display" style={{ width:220, height:220, margin:"0 auto", borderRadius:"50%", display:"flex", alignItems:"center", justifyContent:"center", fontSize:64, fontWeight:700, color:"#fff", background:"linear-gradient(135deg,#2b2be0,#7B2FFF)", boxShadow:"0 0 60px rgba(88,52,190,0.5)" }}>
                       AS
@@ -857,7 +867,7 @@ export default function Portfolio() {
                 </div>
 
                 {/* orbiting badges — ABOVE the person (borderless duplicate rings, same animation = stays in sync) */}
-                <div className="orbit-ring-2" style={{ position:"absolute", left:20, top:40, width:520, height:520, borderRadius:"50%", zIndex:3, pointerEvents:"none" }}>
+                <div className="orbit-ring-2" style={{ position:"absolute", left:20, top:30, width:600, height:600, borderRadius:"50%", zIndex:3, pointerEvents:"none" }}>
                   {[
                     { src:"/icons/chatgpt.svg", alt:"ChatGPT",  pos:{ left:"14.64%", top:"14.64%" } },
                     { src:"/icons/argocd.svg",  alt:"Argo CD",  pos:{ left:"85.36%", top:"14.64%" } },
@@ -869,7 +879,7 @@ export default function Portfolio() {
                     </div>
                   ))}
                 </div>
-                <div className="orbit-ring-1" style={{ position:"absolute", left:100, top:120, width:360, height:360, borderRadius:"50%", zIndex:3, pointerEvents:"none" }}>
+                <div className="orbit-ring-1" style={{ position:"absolute", left:110, top:120, width:420, height:420, borderRadius:"50%", zIndex:3, pointerEvents:"none" }}>
                   {[
                     { src:"/icons/docker.svg",     alt:"Docker",     pos:{ left:"50%", top:"0%" } },
                     { src:"/icons/kubernetes.svg", alt:"Kubernetes", pos:{ left:"100%", top:"50%" } },
@@ -886,15 +896,6 @@ export default function Portfolio() {
 
           </div>
 
-          {/* Stats row */}
-          <div className="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl">
-            {[{n:"3.2+",l:"Years Exp."},{n:"50+",l:"Servers Managed"},{n:"99.99%",l:"Uptime"},{n:"35%",l:"Faster Deploys"}].map(s => (
-              <div key={s.l} className="p-4 text-center rounded-2xl" style={{ background:"rgba(255,255,255,0.03)", border:"1px solid rgba(255,255,255,0.08)" }}>
-                <div className="text-2xl font-black tws-blue">{s.n}</div>
-                <div className="text-slate-500 text-xs mt-1">{s.l}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
