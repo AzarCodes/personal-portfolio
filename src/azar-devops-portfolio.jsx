@@ -65,6 +65,22 @@ const IcoTf = () => (
     <path d="M26 8.5 L26 22 L20 25.5" stroke="#7B42BC" strokeWidth="1.5" strokeLinecap="round"/>
   </svg>
 );
+const IcoDocker = () => (
+  <svg viewBox="0 0 40 40" fill="none" style={{width:30,height:30}}>
+    <rect x="8" y="17" width="5" height="5" rx="0.5" fill="#2496ED"/>
+    <rect x="14" y="17" width="5" height="5" rx="0.5" fill="#2496ED"/>
+    <rect x="20" y="17" width="5" height="5" rx="0.5" fill="#2496ED"/>
+    <rect x="14" y="11" width="5" height="5" rx="0.5" fill="#2496ED"/>
+    <rect x="20" y="11" width="5" height="5" rx="0.5" fill="#2496ED"/>
+    <rect x="20" y="5" width="5" height="5" rx="0.5" fill="#2496ED"/>
+    <path d="M4 24 C4 30 10 34 18 34 C28 34 34 28 36 22 C38 22 39 20 38.5 18.5 C37 17.5 34 18 32 19 C31 16 29 14.5 27 14 C26.5 16.5 27 19 29 21 L4 21 Z" stroke="#2496ED" strokeWidth="1.5" fill="none"/>
+  </svg>
+);
+const IcoWhatsApp = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" style={{width:24,height:24}}>
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+);
 const IcoTerminal = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{width:32,height:32}}>
     <polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>
@@ -266,12 +282,12 @@ function AnimatedBg() {
       x: Math.random() * W, y: Math.random() * H,
       vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
       r: Math.random() * 1.5 + 0.5,
-      color: Math.random() > 0.5 ? "#00D4FF" : "#7B2FFF",
+      color: Math.random() > 0.5 ? "#7f9ff7" : "#7B2FFF",
     }));
     let frame;
     const draw = () => {
       ctx.clearRect(0, 0, W, H);
-      ctx.strokeStyle = "rgba(0,212,255,0.04)";
+      ctx.strokeStyle = "rgba(127,159,247,0.04)";
       ctx.lineWidth = 1;
       for (let x = 0; x < W; x += 60) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
       for (let y = 0; y < H; y += 60) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
@@ -280,7 +296,7 @@ function AnimatedBg() {
           const d = Math.hypot(p.x - q.x, p.y - q.y);
           if (d < 120) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(0,212,255,${0.08 * (1 - d / 120)})`;
+            ctx.strokeStyle = `rgba(127,159,247,${0.08 * (1 - d / 120)})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
           }
@@ -310,7 +326,7 @@ function GlassCard({ children, className = "", hover = true, glow }) {
       hover && "transition-all duration-300 hover:border-cyan-400/30 hover:shadow-xl hover:-translate-y-1",
       glow && "shadow-lg",
       className
-    )} style={glow ? { boxShadow:"0 0 30px rgba(0,212,255,0.08)" } : {}}>
+    )} style={glow ? { boxShadow:"0 0 30px rgba(127,159,247,0.08)" } : {}}>
       {children}
     </div>
   );
@@ -332,7 +348,7 @@ function Section({ id, children, className = "" }) {
 function SectionTitle({ eyebrow, title, subtitle }) {
   return (
     <div className="text-center mb-16">
-      <p className="text-cyan-400 font-mono text-sm tracking-widest uppercase mb-3">{eyebrow}</p>
+      <p className="tws-gold font-medium text-sm tracking-widest uppercase mb-3">{eyebrow}</p>
       <h2 className="text-3xl md:text-5xl font-black text-white mb-4 leading-tight">{title}</h2>
       {subtitle && <p className="text-slate-400 text-lg max-w-2xl mx-auto">{subtitle}</p>}
     </div>
@@ -412,7 +428,7 @@ function ProjectCard({ title, desc, tech, achievements, arch, gradientStyle, git
       <div className="text-xs font-mono text-slate-500 mb-3 p-3 rounded-lg leading-relaxed" style={{background:"rgba(0,0,0,0.2)"}}>{arch}</div>
       <div className="flex flex-wrap gap-2 mb-4">
         {tech.map(t => (
-          <span key={t} className="px-2 py-0.5 rounded-md text-cyan-400 text-xs font-mono border border-cyan-400/20" style={{background:"rgba(0,212,255,0.08)"}}>{t}</span>
+          <span key={t} className="px-2 py-0.5 rounded-md text-cyan-400 text-xs font-mono border border-cyan-400/20" style={{background:"rgba(127,159,247,0.08)"}}>{t}</span>
         ))}
       </div>
       <button onClick={() => setExpanded(!expanded)} className="text-xs text-cyan-400 hover:text-cyan-300 font-mono mb-3 block">
@@ -535,7 +551,7 @@ function ContactForm() {
       )}
       <button type="submit" disabled={status === "sending"}
         className="w-full py-3 rounded-xl text-white font-bold flex items-center justify-center gap-2 transition-all hover:opacity-90 disabled:opacity-60"
-        style={{ background:"linear-gradient(to right,#06b6d4,#2563eb)", border:"none", cursor:"pointer" }}>
+        style={{ background:"linear-gradient(to right, #2b2be0, #4b4bf0)", border:"none", cursor:"pointer" }}>
         {status === "sending" ? "Sending…" : <><span>Send Message</span><IcoArrow /></>}
       </button>
     </form>
@@ -545,6 +561,7 @@ function ContactForm() {
 export default function Portfolio() {
   const [navOpen, setNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [photoOk, setPhotoOk] = useState(true);
   const typed = useTypewriter(["DevSecOps Engineer","AWS Cloud Engineer","Kubernetes Engineer","CI/CD Engineer","Infrastructure Automation Engineer","DevOps Engineer"], 90, 2200);
 
   useEffect(() => {
@@ -637,17 +654,43 @@ export default function Portfolio() {
   ];
 
   return (
-    <div className="min-h-screen text-white relative" style={{ background:"#060612", fontFamily:"'DM Sans', system-ui, sans-serif" }}>
+    <div className="min-h-screen text-white relative" style={{ background:"radial-gradient(ellipse 80% 60% at 70% 20%, rgba(76,42,165,0.35) 0%, transparent 55%), radial-gradient(ellipse 70% 60% at 20% 80%, rgba(43,30,110,0.3) 0%, transparent 55%), #050512", fontFamily:"'Poppins', 'DM Sans', system-ui, sans-serif" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&family=DM+Mono:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Comfortaa:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap');
         * { box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { background: #060612 !important; margin: 0; }
+        body { background: #050512 !important; margin: 0; }
+        /* ---- TrainWithShubham-style theme overrides ---- */
+        .font-display { font-family: 'Comfortaa', 'Poppins', sans-serif; }
+        .tws-gold { color: #f0b429; }
+        .tws-blue { color: #8fb0f5; }
+        .text-cyan-400 { color: #8fb0f5; }
+        .text-cyan-300 { color: #a8c2ff; }
+        .hover\\:text-cyan-400:hover { color: #8fb0f5; }
+        .hover\\:text-cyan-300:hover { color: #a8c2ff; }
+        .border-cyan-400\\/30 { border-color: rgba(143,176,245,0.3); }
+        .border-cyan-400\\/20 { border-color: rgba(143,176,245,0.2); }
+        .hover\\:border-cyan-400\\/30:hover { border-color: rgba(143,176,245,0.3); }
+        .bg-cyan-400 { background-color: #8fb0f5; }
+        @keyframes orbitSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes orbitSpinRev { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+        .orbit-ring-1 { animation: orbitSpin 45s linear infinite; }
+        .orbit-ring-1 .orbit-badge { animation: orbitSpinRev 45s linear infinite; }
+        .orbit-ring-2 { animation: orbitSpinRev 70s linear infinite; }
+        .orbit-ring-2 .orbit-badge { animation: orbitSpin 70s linear infinite; }
+        @media (prefers-reduced-motion: reduce) {
+          .orbit-ring-1, .orbit-ring-2, .orbit-badge, .spin-slow, .spin-slow-rev, .pulse-glow { animation: none !important; }
+        }
+        .orbit-badge {
+          width: 56px; height: 56px; border-radius: 50%;
+          background: #ffffff; display: flex; align-items: center; justify-content: center;
+          box-shadow: 0 4px 18px rgba(0,0,0,0.45), 0 0 0 4px rgba(255,255,255,0.06);
+        }
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #0a0a1e; }
-        ::-webkit-scrollbar-thumb { background: rgba(0,212,255,0.3); border-radius: 2px; }
+        ::-webkit-scrollbar-thumb { background: rgba(127,159,247,0.3); border-radius: 2px; }
         @keyframes floatY { from { transform: translateY(0px); } to { transform: translateY(-18px); } }
-        @keyframes pulseGlow { 0%,100% { box-shadow: 0 0 20px rgba(0,212,255,0.3); } 50% { box-shadow: 0 0 40px rgba(0,212,255,0.6); } }
+        @keyframes pulseGlow { 0%,100% { box-shadow: 0 0 20px rgba(127,159,247,0.3); } 50% { box-shadow: 0 0 40px rgba(127,159,247,0.6); } }
         @keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes spinSlowRev { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
         @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
@@ -657,7 +700,7 @@ export default function Portfolio() {
         .spin-slow-rev { animation: spinSlowRev 35s linear infinite; }
         .cursor-blink { animation: blink 1s step-end infinite; }
         .gradient-text {
-          background: linear-gradient(135deg, #00D4FF, #7B2FFF, #FF6B6B);
+          background: linear-gradient(135deg, #a8c2ff, #8fb0f5, #7B2FFF);
           background-size: 200% 200%;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -690,7 +733,7 @@ export default function Portfolio() {
       <nav style={{
         position:"fixed", top:0, left:0, right:0, zIndex:50,
         transition:"all 0.3s",
-        ...(scrolled ? { background:"rgba(6,6,18,0.92)", backdropFilter:"blur(20px)", borderBottom:"1px solid rgba(255,255,255,0.05)", padding:"12px 0" } : { padding:"20px 0" })
+        ...(scrolled ? { background:"rgba(0,0,0,0.95)", backdropFilter:"blur(20px)", borderBottom:"1px solid rgba(255,255,255,0.07)", padding:"12px 0" } : { background:"#000000", padding:"18px 0" })
       }}>
         <div className="max-w-6xl mx-auto px-4 flex items-center justify-between">
           <button onClick={() => scrollTo("home")} className="font-black text-xl tracking-tight" style={{ background:"none", border:"none", cursor:"pointer" }}>
@@ -705,8 +748,8 @@ export default function Portfolio() {
               </button>
             ))}
             <button onClick={() => scrollTo("contact")}
-              className="ml-2 px-4 py-1.5 rounded-lg text-cyan-400 text-sm font-semibold transition-all"
-              style={{ background:"rgba(0,212,255,0.08)", border:"1px solid rgba(0,212,255,0.3)", cursor:"pointer" }}>
+              className="ml-3 px-8 py-2.5 rounded-md text-white text-sm font-semibold transition-all hover:opacity-90"
+              style={{ background:"#2b2be0", border:"none", cursor:"pointer", boxShadow:"0 4px 16px rgba(43,43,224,0.4)" }}>
               Hire Me
             </button>
           </div>
@@ -727,53 +770,128 @@ export default function Portfolio() {
         )}
       </nav>
 
-      {/* HERO */}
-      <section id="home" className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden"
-        style={{ background:"radial-gradient(ellipse at 50% 50%, rgba(0,212,255,0.06) 0%, transparent 70%)" }}>
-        <div style={{ position:"absolute", inset:0, display:"flex", alignItems:"center", justifyContent:"center", pointerEvents:"none" }}>
-          <div className="spin-slow" style={{ width:600, height:600, borderRadius:"50%", border:"1px solid rgba(0,212,255,0.05)", position:"absolute" }} />
-          <div className="spin-slow-rev" style={{ width:800, height:800, borderRadius:"50%", border:"1px solid rgba(123,47,255,0.04)", position:"absolute" }} />
-        </div>
-        <div className="relative text-center max-w-4xl mx-auto" style={{ zIndex:2 }}>
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8" style={{ border:"1px solid rgba(0,212,255,0.3)", background:"rgba(0,212,255,0.05)" }}>
-            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-cyan-400 text-xs font-mono tracking-wider">AVAILABLE FOR OPPORTUNITIES</span>
+      {/* HERO — TrainWithShubham style */}
+      <section id="home" className="relative min-h-screen flex items-center px-4 overflow-hidden pt-28 pb-16"
+        style={{ background:"radial-gradient(ellipse 60% 70% at 72% 45%, rgba(88,52,190,0.28) 0%, transparent 65%)" }}>
+        <div className="relative max-w-7xl mx-auto w-full" style={{ zIndex:2 }}>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+
+            {/* LEFT — intro + quote card */}
+            <div>
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6" style={{ border:"1px solid rgba(74,222,128,0.35)", background:"rgba(74,222,128,0.06)" }}>
+                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                <span className="text-green-400 text-xs font-mono tracking-wider">AVAILABLE FOR OPPORTUNITIES</span>
+              </div>
+
+              <p className="tws-gold font-medium text-base md:text-lg mb-3">
+                Build, Automate &amp; Secure the Cloud — DevOps in 2026
+              </p>
+
+              <h1 className="font-display font-light leading-none mb-5" style={{ fontSize:"clamp(3rem, 6vw, 4.8rem)", color:"#8fb0f5", letterSpacing:"0.01em" }}>
+                Azar S
+              </h1>
+
+              <div className="text-white font-semibold text-lg md:text-xl mb-8" style={{ minHeight:"2rem" }}>
+                {typed}<span className="cursor-blink tws-blue ml-0.5">_</span>
+                <span className="block text-slate-400 text-sm font-normal tracking-widest uppercase mt-2">
+                  AWS · Kubernetes · CI/CD · Terraform · DevSecOps
+                </span>
+              </div>
+
+              {/* Tab + quote card */}
+              <div className="max-w-xl">
+                <div className="inline-block px-6 py-3 rounded-t-xl text-white text-sm font-semibold"
+                  style={{ background:"rgba(255,255,255,0.06)", border:"1px solid rgba(255,255,255,0.12)", borderBottom:"2px solid #8fb0f5" }}>
+                  DevOps Engineer [3.2+ Years]
+                </div>
+                <div className="p-7 rounded-b-2xl rounded-tr-2xl backdrop-blur-md" style={{ background:"rgba(10,10,30,0.55)", border:"1px solid rgba(255,255,255,0.09)" }}>
+                  <div className="tws-gold text-5xl font-serif leading-none mb-3" aria-hidden="true">&ldquo;</div>
+                  <p className="text-slate-300 leading-relaxed mb-4">
+                    Hello Dosto, This is <span className="px-1.5 py-0.5 rounded font-semibold text-white" style={{ background:"#2b2be0" }}>Azar S</span> — a
+                    DevOps Engineer at SPM Global Technologies. With <strong className="text-white">3.2+ years</strong> of experience building and
+                    running production cloud infrastructure, I&apos;m deeply passionate about AWS, Kubernetes, CI/CD automation, and DevSecOps.
+                  </p>
+                  <p className="text-slate-300 leading-relaxed mb-5">
+                    My mission is simple: turn manual operational pain into elegant automation. I manage <strong className="text-white">50+ production servers</strong> at
+                    <strong className="text-white"> 99.99% uptime</strong>, with security, observability, and disaster recovery baked in from day one.
+                  </p>
+                  <button onClick={() => scrollTo("about")} className="tws-blue text-sm font-medium hover:underline" style={{ background:"none", border:"none", cursor:"pointer", padding:0 }}>
+                    Find more about me
+                  </button>
+                  <div className="flex items-center gap-6 mt-6 pt-5" style={{ borderTop:"1px solid rgba(255,255,255,0.08)" }}>
+                    {[
+                      { icon:<IcoGithub />, label:"GitHub", href:"https://github.com/AzarCodes" },
+                      { icon:<IcoLinkedin />, label:"LinkedIn", href:"https://www.linkedin.com/in/azar-devops/" },
+                      { icon:<IcoEmail />, label:"Email", href:"mailto:azar.sameeulla@outlook.com" },
+                    ].map(s => (
+                      <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-1.5 text-slate-400 hover:text-white transition-colors" style={{ textDecoration:"none" }}>
+                        <span className="w-11 h-11 rounded-full flex items-center justify-center" style={{ border:"1.5px solid rgba(255,255,255,0.25)" }}>{s.icon}</span>
+                        <span className="text-xs">{s.label}</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mt-8">
+                <button onClick={() => scrollTo("projects")}
+                  className="pulse-glow px-7 py-3 rounded-md text-white font-bold flex items-center gap-2 transition-all hover:opacity-90"
+                  style={{ background:"#2b2be0", border:"none", cursor:"pointer" }}>
+                  View Projects <IcoArrow />
+                </button>
+                <a href="/AzarS_DevOps_Resume.pdf" download="AzarS_DevOps_Resume.pdf"
+                  className="px-6 py-3 rounded-md text-white font-semibold flex items-center gap-2 transition-all"
+                  style={{ background:"rgba(255,255,255,0.05)", border:"1px solid rgba(255,255,255,0.2)", cursor:"pointer", textDecoration:"none" }}>
+                  <IcoDownload /> Download Resume
+                </a>
+              </div>
+            </div>
+
+            {/* RIGHT — orbiting tech icons around photo */}
+            <div className="hidden lg:flex items-center justify-center relative" style={{ minHeight:560 }}>
+              <div style={{ position:"relative", width:540, height:540 }}>
+                {/* outer ring */}
+                <div className="orbit-ring-2" style={{ position:"absolute", inset:20, borderRadius:"50%", border:"1.5px dashed rgba(143,176,245,0.25)" }}>
+                  {[
+                    { icon:<IcoGithub />,   pos:{ left:"14.64%", top:"14.64%" }, color:"#000" },
+                    { icon:<IcoShield />,   pos:{ left:"85.36%", top:"14.64%" }, color:"#16a34a" },
+                    { icon:<IcoZap />,      pos:{ left:"85.36%", top:"85.36%" }, color:"#f0b429" },
+                    { icon:<IcoServer />,   pos:{ left:"14.64%", top:"85.36%" }, color:"#7B2FFF" },
+                  ].map((b, i) => (
+                    <div key={i} className="orbit-badge" style={{ position:"absolute", ...b.pos, transform:"translate(-50%,-50%)", color:b.color }}>{b.icon}</div>
+                  ))}
+                </div>
+                {/* inner ring */}
+                <div className="orbit-ring-1" style={{ position:"absolute", inset:105, borderRadius:"50%", border:"1.5px dashed rgba(143,176,245,0.35)" }}>
+                  {[
+                    { icon:<IcoAws />,    pos:{ left:"50%", top:"0%" } },
+                    { icon:<IcoDocker />, pos:{ left:"100%", top:"50%" } },
+                    { icon:<IcoK8s />,    pos:{ left:"50%", top:"100%" } },
+                    { icon:<IcoTf />,     pos:{ left:"0%", top:"50%" } },
+                  ].map((b, i) => (
+                    <div key={i} className="orbit-badge" style={{ position:"absolute", ...b.pos, transform:"translate(-50%,-50%)" }}>{b.icon}</div>
+                  ))}
+                </div>
+                {/* center — photo (drop your photo at public/azar.png) */}
+                <div style={{ position:"absolute", inset:190, borderRadius:"50%", overflow:"hidden", border:"3px solid rgba(143,176,245,0.4)", boxShadow:"0 0 60px rgba(88,52,190,0.5)" }}>
+                  {photoOk ? (
+                    <img src="/azar.png" alt="Azar S" onError={() => setPhotoOk(false)}
+                      style={{ width:"100%", height:"100%", objectFit:"cover" }} />
+                  ) : (
+                    <div className="font-display" style={{ width:"100%", height:"100%", display:"flex", alignItems:"center", justifyContent:"center", fontSize:56, fontWeight:700, color:"#fff", background:"linear-gradient(135deg,#2b2be0,#7B2FFF)" }}>
+                      AS
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
-          <h1 className="text-5xl md:text-7xl font-black leading-none mb-4">
-            <span className="block text-white mb-1">Hi, I'm</span>
-            <span className="gradient-text">Azar S</span>
-          </h1>
-          <div className="text-xl md:text-2xl font-mono text-slate-300 mb-3 h-8">
-            <span className="text-cyan-400">&gt; </span>{typed}
-            <span className="cursor-blink text-cyan-400 ml-0.5">_</span>
-          </div>
-          <p className="text-sm font-semibold tracking-widest text-slate-500 uppercase mb-6">
-            DevOps Engineer · AWS · Kubernetes · CI/CD · Terraform
-          </p>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-            Experienced DevOps Engineer with <span className="text-cyan-400 font-semibold">3.2+ years</span> of expertise in AWS cloud infrastructure, CI/CD automation, Kubernetes, monitoring, and production systems at scale.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <button onClick={() => scrollTo("projects")}
-              className="pulse-glow px-6 py-3 rounded-xl text-white font-bold flex items-center gap-2 transition-all hover:opacity-90"
-              style={{ background:"linear-gradient(to right,#06b6d4,#2563eb)", border:"none", cursor:"pointer" }}>
-              View Projects <IcoArrow />
-            </button>
-            <a href="/AzarS_DevOps_Resume.pdf" download="AzarS_DevOps_Resume.pdf"
-              className="px-6 py-3 rounded-xl text-white font-semibold flex items-center gap-2 transition-all"
-              style={{ background:"rgba(255,255,255,0.05)", border:"1px solid rgba(255,255,255,0.2)", cursor:"pointer", textDecoration:"none" }}>
-              <IcoDownload /> Download Resume
-            </a>
-            <button onClick={() => scrollTo("contact")}
-              className="px-6 py-3 rounded-xl text-purple-300 font-semibold transition-all"
-              style={{ background:"rgba(168,85,247,0.05)", border:"1px solid rgba(168,85,247,0.3)", cursor:"pointer" }}>
-              Contact Me
-            </button>
-          </div>
-          <div className="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-4">
+
+          {/* Stats row */}
+          <div className="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl">
             {[{n:"3.2+",l:"Years Exp."},{n:"50+",l:"Servers Managed"},{n:"99.99%",l:"Uptime"},{n:"35%",l:"Faster Deploys"}].map(s => (
               <div key={s.l} className="p-4 text-center rounded-2xl" style={{ background:"rgba(255,255,255,0.03)", border:"1px solid rgba(255,255,255,0.08)" }}>
-                <div className="text-2xl font-black text-cyan-400">{s.n}</div>
+                <div className="text-2xl font-black tws-blue">{s.n}</div>
                 <div className="text-slate-500 text-xs mt-1">{s.l}</div>
               </div>
             ))}
@@ -785,7 +903,7 @@ export default function Portfolio() {
       <Section id="about">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <p className="text-cyan-400 font-mono text-sm tracking-widest uppercase mb-3">About Me</p>
+            <p className="tws-gold font-medium text-sm tracking-widest uppercase mb-3">About Me</p>
             <h2 className="text-3xl md:text-5xl font-black text-white mb-6 leading-tight">
               Building Infrastructure<br/><span className="gradient-text">That Never Sleeps</span>
             </h2>
@@ -882,7 +1000,7 @@ export default function Portfolio() {
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-cyan-400 font-semibold text-sm transition-all hover:opacity-80"
-            style={{ background:"rgba(0,212,255,0.08)", border:"1px solid rgba(0,212,255,0.3)", textDecoration:"none" }}
+            style={{ background:"rgba(127,159,247,0.08)", border:"1px solid rgba(127,159,247,0.3)", textDecoration:"none" }}
           >
             <IcoGithub /> View All Repositories
           </a>
@@ -934,7 +1052,7 @@ export default function Portfolio() {
               </div>
               <span className="text-xs font-bold px-2 py-0.5 rounded-full mb-3 inline-block"
                 style={c.status === "In Progress"
-                  ? { background:"rgba(0,212,255,0.1)", color:"#22d3ee", border:"1px solid rgba(0,212,255,0.3)" }
+                  ? { background:"rgba(127,159,247,0.1)", color:"#22d3ee", border:"1px solid rgba(127,159,247,0.3)" }
                   : { background:"rgba(168,85,247,0.08)", color:"#a78bfa", border:"1px solid rgba(168,85,247,0.2)" }}>
                 {c.status}
               </span>
@@ -1016,9 +1134,17 @@ export default function Portfolio() {
               </a>
             ))}
           </div>
-          <p className="text-slate-700 text-xs">© 2025 Azar S. Built with React + Tailwind CSS</p>
+          <p className="text-slate-700 text-xs">© 2026 Azar S. Built with React + Tailwind CSS</p>
         </div>
       </footer>
+
+      {/* Floating WhatsApp — TWS style */}
+      <a href="https://wa.me/917899035306?text=Hi%20Azar%2C%20I%20came%20across%20your%20portfolio"
+        target="_blank" rel="noopener noreferrer" aria-label="Contact on WhatsApp"
+        className="fixed flex items-center gap-2.5 px-5 py-3 rounded-full text-white font-semibold text-sm transition-all hover:scale-105"
+        style={{ bottom:24, right:24, zIndex:60, background:"#25D366", boxShadow:"0 6px 24px rgba(37,211,102,0.45)", textDecoration:"none" }}>
+        <IcoWhatsApp /> Contact us
+      </a>
     </div>
   );
 }
