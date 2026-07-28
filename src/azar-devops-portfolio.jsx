@@ -761,7 +761,7 @@ export default function Portfolio() {
 
       {/* HERO — TrainWithShubham style */}
       <section id="home" className="relative min-h-screen flex items-center px-4 overflow-hidden pt-28 pb-0"
-        style={{ background:"radial-gradient(ellipse 60% 70% at 72% 45%, rgba(88,52,190,0.28) 0%, transparent 65%)" }}>
+        style={{ background:"black" }}>
         <div className="relative max-w-7xl mx-auto w-full" style={{ zIndex:2 }}>
           <div className="grid lg:grid-cols-2 gap-12 items-center">
 
